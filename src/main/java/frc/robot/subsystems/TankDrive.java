@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.Drive;
 
 /**
  * Add your docs here.
@@ -28,7 +29,7 @@ public class TankDrive extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new Drive());
 
   }
   public void drive(double x, double y) {
