@@ -25,7 +25,7 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drive.drive(Robot.m_oi.getJoyX(), Robot.m_oi.getJoyZ());
+    Robot.drive.drive(Robot.m_oi.getJoyY(), Robot.m_oi.getJoyZ());
   
   }
 

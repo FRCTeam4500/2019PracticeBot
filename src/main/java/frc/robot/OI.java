@@ -19,11 +19,11 @@ public class OI {
     driveStick = new Joystick(0);
 
   }
-  public double getJoyX() {
-    return driveStick.getX();
+  public double getJoyY() {
+    return Math.abs(driveStick.getY()) > RobotMap.DEADZONE_XY ? driveStick.getY() *.5 : 0;
     
   }
   public double getJoyZ() {
-    return driveStick.getZ();
+    return Math.abs(driveStick.getZ()) > RobotMap.DEADZONE_Z ? driveStick.getZ() * .5 : 0;
   }
 }

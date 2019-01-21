@@ -32,10 +32,18 @@ public class TankDrive extends Subsystem {
     setDefaultCommand(new Drive());
 
   }
-  public void drive(double x, double y) {
-    lFront.set(x);
-    lBack.set(x);
-    rFront.set(x);
-    rBack.set(x);
+  public void drive(double y, double z) {
+    double L = z+y;
+    double R = z-y;
+    double max = Math.abs(L) > Math.abs(R) ? L : R;
+    if (max > 1) {
+      L /= max;
+      R /= max;
+    }
+
+    lFront.set(L);
+    lBack.set(L);
+    rFront.set(R);
+    rBack.set(R);
   }
 }
