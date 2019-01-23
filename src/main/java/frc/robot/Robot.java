@@ -7,13 +7,17 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RunMotorsCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.TestBed;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +30,8 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
 
+  public static TestBed testBed;
+  public static Joystick joystick;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -39,6 +45,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    testBed = new TestBed(0, 1, 2);
+    joystick = new Joystick(0);
   }
 
   /**
@@ -101,6 +109,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    
   }
 
   @Override
@@ -112,6 +121,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    
   }
 
   /**
@@ -120,6 +130,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putNumber("JoyX",joystick.getX());
+    RunMotorsCommand c = new RunMotorsCommand(testBed, joystick.getX(), joystick.getY(), joystick.getZ());
+    c.start();
   }
 
   /**
@@ -127,5 +140,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    testBed.RunMotors(1, 1, 1);
   }
 }
