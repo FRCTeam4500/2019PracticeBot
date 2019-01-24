@@ -13,7 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.TankDrive_MoveAndTurn;
 import frc.robot.interfaces.wrappers.DashboardMotor;
+import frc.robot.interfaces.wrappers.VictorSPMotor;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.TankDrive;
 
@@ -43,6 +45,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     tankDrive = new TankDrive(new DashboardMotor(RobotMap.FL_MOTOR_PORT), new DashboardMotor(RobotMap.FR_MOTOR_PORT), new DashboardMotor(RobotMap.BL_MOTOR_PORT), new DashboardMotor(RobotMap.BR_MOTOR_PORT));
+    //tankDrive = new TankDrive(new VictorSPMotor(RobotMap.FL_MOTOR_PORT), new VictorSPMotor(RobotMap.FR_MOTOR_PORT), new VictorSPMotor(RobotMap.BL_MOTOR_PORT), new DashboardMotor(RobotMap.BR_MOTOR_PORT));
   }
 
   /**
@@ -124,6 +127,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    var c = new TankDrive_MoveAndTurn(tankDrive, m_oi.getY(), m_oi.getZ());
+    c.start();
   }
 
   /**

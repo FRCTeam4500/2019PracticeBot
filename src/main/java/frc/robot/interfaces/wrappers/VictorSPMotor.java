@@ -7,27 +7,25 @@
 
 package frc.robot.interfaces.wrappers;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.VictorSP;
 import frc.robot.interfaces.IMotor;
 
 /**
  * Add your docs here.
  */
-public class DashboardMotor implements IMotor {
+public class VictorSPMotor implements IMotor{
 
-    private int id;
-    public DashboardMotor(int id){
-        this.id = id;
+    private VictorSP victorSP;
+    public VictorSPMotor(int channel){
+        victorSP = new VictorSP(channel);
     }
     @Override
     public void setSpeed(double speed) {
-        SmartDashboard.putNumber("Dashboard Motor "+Integer.toString(id)+" Speed: ", speed);
-        //System.out.print("Dashboard Motor "+Integer.toString(id)+" Speed: "+Double.toString(speed));
+        victorSP.setSpeed(speed);
     }
 
     @Override
     public void set(double speed) {
-        SmartDashboard.putNumber("Dashboard Motor "+Integer.toString(id)+" Speed: ", speed);
-        //System.out.print("Dashboard Motor "+Integer.toString(id)+" Speed: "+Double.toString(speed));
+        victorSP.set(speed);
     }
 }
