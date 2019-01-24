@@ -14,11 +14,19 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
+
+	public static final int JOYSTICK_PORT = 0;
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
   // public static int leftMotor = 1;
   // public static int rightMotor = 2;
-
+	public static final double DEADZONE_XY = 0;
+  public static final double DEADZONE_Z = 0;
+  
+  public static final int FL_MOTOR_PORT = 0;
+  public static final int FR_MOTOR_PORT = 0;
+  public static final int BL_MOTOR_PORT = 0;
+  public static final int BR_MOTOR_PORT = 0;
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
