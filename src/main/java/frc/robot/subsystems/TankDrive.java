@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.OI;
+import frc.robot.commands.TankDrive_MoveAndTurn;
 import frc.robot.interfaces.IMotor;
 
 /**
@@ -17,11 +19,13 @@ public class TankDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private IMotor fl, fr, bl, br;
-  public TankDrive(IMotor fl, IMotor fr, IMotor bl, IMotor br){
+  private OI oi;
+  public TankDrive(OI oi, IMotor fl, IMotor fr, IMotor bl, IMotor br){
     this.fl = fl;
     this.fr = fr;
     this.bl = bl;
     this.br = br;
+    this.oi = oi;
   }
   public void DriveMotors(double leftSpeed, double rightSpeed){
     fl.set(leftSpeed);
@@ -40,5 +44,6 @@ public class TankDrive extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    //setDefaultCommand(new TankDrive_MoveAndTurn(this, oi));
   }
 }
