@@ -39,8 +39,10 @@ public class TankDrive extends Subsystem {
     double leftSpeed = lateralInput+turnInput;
     double rightSpeed = -lateralInput+turnInput;
     double maxSpeed = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
-    leftSpeed /= maxSpeed;
-    rightSpeed /= maxSpeed;
+    if(maxSpeed > 1){
+      leftSpeed /= maxSpeed;
+      rightSpeed /= maxSpeed;
+    }
     DriveMotors(leftSpeed, rightSpeed);
   }
   @Override
