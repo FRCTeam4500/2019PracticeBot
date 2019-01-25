@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.TankDrive_MoveAndTurn;
 import frc.robot.interfaces.wrappers.DashboardMotor;
 import frc.robot.interfaces.wrappers.VictorSPMotor;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -27,12 +26,12 @@ import frc.robot.subsystems.TankDrive;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
+  public static ExampleSubsystem subsystem = new ExampleSubsystem();
+  public static OI oi;
 
   public static TankDrive tankDrive;
   Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -40,11 +39,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    oi = new OI();
+    chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
-    tankDrive = new TankDrive(m_oi,new DashboardMotor(RobotMap.FL_MOTOR_PORT), new DashboardMotor(RobotMap.FR_MOTOR_PORT), new DashboardMotor(RobotMap.BL_MOTOR_PORT), new DashboardMotor(RobotMap.BR_MOTOR_PORT));
+    SmartDashboard.putData("Auto mode", chooser);
+    tankDrive = new TankDrive(oi,new DashboardMotor(RobotMap.FL_MOTOR_PORT), new DashboardMotor(RobotMap.FR_MOTOR_PORT), new DashboardMotor(RobotMap.BL_MOTOR_PORT), new DashboardMotor(RobotMap.BR_MOTOR_PORT));
     //tankDrive = new TankDrive(m_oi,new VictorSPMotor(RobotMap.FL_MOTOR_PORT), new VictorSPMotor(RobotMap.FR_MOTOR_PORT), new VictorSPMotor(RobotMap.BL_MOTOR_PORT), new VictorSPMotor(RobotMap.BR_MOTOR_PORT));
   }
 
@@ -87,7 +86,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -127,7 +126,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    tankDrive.DriveAndTurn(m_oi.getY(), m_oi.getZ());
   }
 
   /**

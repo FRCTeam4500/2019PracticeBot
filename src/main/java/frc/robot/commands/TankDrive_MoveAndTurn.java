@@ -19,6 +19,7 @@ public class TankDrive_MoveAndTurn extends Command {
     // eg. requires(chassis);
     this.tankDrive = tankDrive;
     this.oi = oi;
+    requires(tankDrive);
   }
 
   // Called just before this Command runs the first time

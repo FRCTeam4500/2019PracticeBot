@@ -38,12 +38,15 @@ public class TankDrive extends Subsystem {
     //literally just stolen from here lmao http://home.kendra.com/mauser/Joystick.html  
     double leftSpeed = lateralInput+turnInput;
     double rightSpeed = -lateralInput+turnInput;
+    double maxSpeed = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
+    leftSpeed /= maxSpeed;
+    rightSpeed /= maxSpeed;
     DriveMotors(leftSpeed, rightSpeed);
   }
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    //setDefaultCommand(new TankDrive_MoveAndTurn(this, oi));
+    setDefaultCommand(new TankDrive_MoveAndTurn(this, oi));
   }
 }
