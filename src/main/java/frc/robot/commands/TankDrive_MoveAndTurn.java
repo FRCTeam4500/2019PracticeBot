@@ -8,17 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
+import frc.robot.interfaces.lambdas.IGetInput;
 import frc.robot.subsystems.TankDrive;
 
 public class TankDrive_MoveAndTurn extends Command {
   private TankDrive tankDrive;
-  private OI oi;
-  public TankDrive_MoveAndTurn(TankDrive tankDrive, OI oi) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  private IGetInput lateralInput;
+  private IGetInput rotationalInput;
+
+  public TankDrive_MoveAndTurn(TankDrive tankDrive, IGetInput lateralInput, IGetInput rotationalInput){
     this.tankDrive = tankDrive;
-    this.oi = oi;
+    this.lateralInput = lateralInput;
+    this.rotationalInput = rotationalInput;
     requires(tankDrive);
   }
 
@@ -30,7 +31,7 @@ public class TankDrive_MoveAndTurn extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    tankDrive.DriveAndTurn(oi.getY()*0.25, oi.getX()*0.25);
+    tankDrive.DriveAndTurn(lateralInput.getInput(), rotationalInput.getInput());
   }
 
   // Make this return true when this Command no longer needs to run execute()

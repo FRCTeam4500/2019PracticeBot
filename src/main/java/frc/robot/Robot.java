@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
     //tankDrive = new TankDrive(oi,new DashboardMotor(RobotMap.FL_MOTOR_PORT), new DashboardMotor(RobotMap.FR_MOTOR_PORT), new DashboardMotor(RobotMap.BL_MOTOR_PORT), new DashboardMotor(RobotMap.BR_MOTOR_PORT));
-    tankDrive = new TankDrive(oi,new VictorSPMotor(RobotMap.FL_MOTOR_PORT), new VictorSPMotor(RobotMap.FR_MOTOR_PORT), new VictorSPMotor(RobotMap.BL_MOTOR_PORT), new VictorSPMotor(RobotMap.BR_MOTOR_PORT));
+    tankDrive = new TankDrive(() -> oi.getY() * RobotMap.JOYSTICK_SENSITIVITY, () -> oi.getX() * RobotMap.JOYSTICK_SENSITIVITY,new VictorSPMotor(RobotMap.FL_MOTOR_PORT), new VictorSPMotor(RobotMap.FR_MOTOR_PORT), new VictorSPMotor(RobotMap.BL_MOTOR_PORT), new VictorSPMotor(RobotMap.BR_MOTOR_PORT));
   }
 
   /**
